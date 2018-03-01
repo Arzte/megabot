@@ -2,7 +2,7 @@
 // THIS SHOULD'VE HAPPENED WHEN I STARTED THIS PROJECT
 // WOW
 
-module.exports = { 
+module.exports = {
   UVRegex: /https?:\/\/[\w.]+\/forums\/(\d{6,})(?:-[\w-]+)?\/suggestions\/(\d{7,})(?:-[\w-]*)?/,
   AutoRole: {
     enabled: true,
@@ -45,7 +45,7 @@ module.exports = {
   Debugging: {
     enable: false,
     mocking: {
-      email: 'notdougley@example.com', // email addres returned by getMail, getMail is designed to only work on production
+      email: 'notdougley@example.com' // email addres returned by getMail, getMail is designed to only work on production
     }
   }
 }

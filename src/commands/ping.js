@@ -3,7 +3,7 @@ module.exports = {
     level: 10,
     timeout: 0,
     alias: [],
-    help: 'Gives a response if the bot is alive',
+    help: 'Gives a response if the bot is alive'
   },
   fn: (msg) => {
     let start = new Date(msg.timestamp)

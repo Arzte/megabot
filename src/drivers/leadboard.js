@@ -11,7 +11,7 @@ module.exports = {
         result.push({
           raw: x,
           embed: {
-            title: "Leaderboards - Place " + count,
+            title: 'Leaderboards - Place ' + count,
             color: 3733813,
             description: user.username + '#' + user.discriminator,
             thumbnail: {
@@ -19,7 +19,7 @@ module.exports = {
             },
             fields: [
               {
-                name: "EXP",
+                name: 'EXP',
                 value: x.exp
               }
             ]

@@ -1,8 +1,8 @@
 module.exports = {
   Guild: {
-      id: '268811439588900865',
-      feed: '258274103935369219'
-  }, 
+    id: '268811439588900865',
+    feed: '258274103935369219'
+  },
   UVRegex: /https?:\/\/[\w.]+\/forums\/(\d{6,})(?:-[\w-]+)?\/suggestions\/(\d{7,})(?:-[\w-]*)?/,
   AutoRole: {
     enabled: true,
@@ -22,8 +22,8 @@ module.exports = {
   UV: {
     Login: {
       forum_id: '',
-      subdomain: '',  // Uservoice *.uservoice.com subdomain, not your custom domain  
-      api_key: '',
+      subdomain: '', // Uservoice *.uservoice.com subdomain, not your custom domain
+      api_key: ''
     },
     Channels: {
       default: false, // false = ignore !sumbit commands in uncategorized channels. supply a category ID to default to that category. leave blank to submit uncategorized, if possible

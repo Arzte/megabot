@@ -1,4 +1,4 @@
-const driver = require('../internal/database-selector')
+const driver = require('../internal/database-selector') // eslint-disable-line no-unused-vars
 
 module.exports = {
   prefix: async (guild, msg) => {
