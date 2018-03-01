@@ -5,7 +5,6 @@ global.i18n = require('./src/internal/i18n')
 global.logger.log('Beginning startup sequence...')
 
 require('./src/internal/check-env')
-require('./src/internal/version-check')
 
 const Eris = require('eris')
 const Events = require('./src/internal/directory-loader')('./src/events')
@@ -41,5 +40,4 @@ process.on('uncaughtException', (err) => {
 
 bot.connect().then(() => {
   global.bot = bot
-  require('./src/internal/bezerk')
 })

@@ -1,62 +1,41 @@
 {
-  "name": "MegaBot",
-  "version": "0.1.0",
-  "description": "Bot for the Discord Feedback server",
+  "private": true,
+  "name": "megabot",
+  "version": "2.0.0",
+  "description": "Discord bot",
   "main": "index.js",
   "scripts": {
-    "test": "eslint . && mocha",
-    "dbcreate": "node src/internal/db-init.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dbcreate": "node src/internal/db-init.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Arzte/megabot.git"
   },
-  "maintainers": [
-    {
-      "name": "Benjamin Hoffmeyer (TheDoctorsLife)",
-      "email": "doctors@doc.tors.life",
-      "url": "https://doc.tors.life"
-    }
-  ],
   "author": "Remco Jongschaap <hello@dougley.com>",
-  "license": "GPL-3.0",
+  "contributors": [
+    "Benjamin Hoffmeyer (TheDoctorsLife) <doctors@doc.tors.life>"
+  ],
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/Arzte/megabot/issues"
   },
-  "homepage": "https://github.com/Arzte/megabot#readme",
+  "homepage": "https://github.com/Arzte/megabot",
   "devDependencies": {
-    "ajv": "^5.2.3",
-    "eslint": "^4.18.1",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.9.0",
+    "eslint": "^4.16.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "mocha": "^5.0.1",
+    "mocha": "^5.0.0",
     "standard": "^10.0.3"
   },
   "dependencies": {
-    "chalk": "^2.3.1",
-    "discordie": "git://github.com/qeled/discordie.git#dev",
+    "chalk": "^2.3.0",
     "dotenv": "^4.0.0",
-    "eris": "^0.8.4",
-    "git-rev-sync": "^1.9.1",
-    "html-entities": "^1.2.1",
-    "ioredis": "^3.1.4",
+    "eris": "^0.8.3",
     "moment": "^2.20.1",
-    "raven": "^2.4.2",
-    "require-directory": "^2.1.1",
-    "requireindex": "^1.1.0",
-    "superagent": "^3.8.2",
-    "tag-replacer": "^1.2.2",
-    "uservoice-nodejs": "^0.0.13",
-    "ws": "^4.1.0",
-    "xml-js": "^1.6.2"
-  },
-  "optionalDependencies": {
-    "arangojs": "^6.0.0",
-    "elasticsearch": "^14.0.0",
-    "rethinkdbdash": "^2.3.29"
+    "superagent": "^3.8.2"
   }
 }
