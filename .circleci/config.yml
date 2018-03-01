@@ -1,0 +1,72 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install modules
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Test
+          command: npm test
+  build:
+    docker:
+      - image: docker:latest
+    steps:
+      - run: 
+          name: Git
+          command: apk add --update git
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Docker building
+          command: |
+            git submodule update --init --remote
+            if [ "$CIRCLE_BRANCH" = "master" ]; then docker build -t dougley/wildbeast:latest --build-arg buildno=$CIRCLE_BUILD_NUM --build-arg commitsha=$CIRCLE_SHA1 .; else docker build -t dougley/wildbeast:$CIRCLE_BRANCH --build-arg buildno=$CIRCLE_BUILD_NUM --build-arg commitsha=$CIRCLE_SHA1 .; fi
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            if [ "$CIRCLE_BRANCH" = "master" ]; then docker push dougley/wildbeast:latest; else docker push dougley/wildbeast:$CIRCLE_BRANCH; fi
+  tagged-build:
+    docker:
+      - image: docker:latest
+    steps:
+      - run:
+          name: Git
+          command: apk add --update git
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Docker building
+          command: |
+            git submodule update --init --remote
+            docker build -t dougley/wildbeast:$(git describe --abbrev=0 --tags) --build-arg buildno=$CIRCLE_BUILD_NUM --build-arg commitsha=$CIRCLE_SHA1 .
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push dougley/wildbeast:$(git describe --abbrev=0 --tags)
+workflows:
+  version: 2
+  test_n_build:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /master|experimental/
+      - tagged-build:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.+/
