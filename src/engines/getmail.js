@@ -5,7 +5,7 @@ const Redis = require('../models/redis')
 module.exports = {
   getMail: (userid) => {
     return new Promise((resolve, reject) => {
-      if (process.env.DEBUG) return resolve(Constants.debug_email)
+      if (process.env.DEBUG !== false) return resolve(Constants.debug_email)
       UV.v2.loginAsOwner().then(client => {
         return client.get(`admin/external_users/${userid}`)
       }).then(result => {
