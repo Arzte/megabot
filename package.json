@@ -32,9 +32,13 @@
     "standard": "^10.0.3"
   },
   "dependencies": {
+    "uservoice-nodejs": "^0.0.13",
     "chalk": "^2.3.0",
     "dotenv": "^4.0.0",
     "eris": "^0.8.3",
+    "ioredis": "^3.1.4",
+    "arangojs": "^6.0.0",
+    "rethinkdbdash": "^2.3.29",
     "moment": "^2.20.1",
     "superagent": "^3.8.2"
   }
