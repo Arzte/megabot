@@ -1,5 +1,5 @@
 const UV = require('../models/uservoice')
-const Constants = require('../internals/constants')
+const Constants = require('../internal/constants')
 const Redis = require('../models/redis')
 
 module.exports = {

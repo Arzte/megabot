@@ -1,4 +1,4 @@
-const Constants = require('../internals/constants')
+const Constants = require('../internal/constants')
 const Helpers = {
   login: require('../engines/login')
 }

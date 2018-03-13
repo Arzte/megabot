@@ -1,5 +1,5 @@
 const UserVoice = require('uservoice-nodejs')
-const Constants = require('../intenals/constants')
+const Constants = require('../internal/constants')
 
 module.exports = {
   v2: new UserVoice.ClientV2({

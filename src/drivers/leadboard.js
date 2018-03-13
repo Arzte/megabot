@@ -1,5 +1,5 @@
 const r = require('../models/rethinkdb')
-const Constants = require('../../constants')
+const Constants = require('../internal/constants')
 
 module.exports = {
   generateLeaderboard: (bot) => {
