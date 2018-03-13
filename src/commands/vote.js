@@ -12,8 +12,7 @@ module.exports = {
     }
   },
   fn: (msg, suffix) => {
-    msg.bot.sendTyping()
-    Helpers.login.userv1(msg.author.id).then(client => {
+    Helpers.login.user(msg.author.id).then(client => {
       client.post(`forums/${Constants.UV.Forum_ID}/suggestions/${suffix}/votes.json`).then(result => {
         msg.addReaction(`<:f1:401095659656183848>`).then(message => {
           setTimeout(() => message.removeReaction(`<:f1:401095659656183848>`), Constants.Timeouts.removeReaction)

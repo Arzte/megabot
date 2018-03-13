@@ -14,7 +14,7 @@ module.exports = {
   fn: (msg, suffix) => {
     msg.channel.sendTyping()
     const index = suffix.split(' | ')
-    Helpers.login.userv1(msg.author.id).then(client => {
+    Helpers.login.user(msg.author.id).then(client => {
       return client.post(`forums/${Constants.UV.Forum_ID}/suggestions.json`, {
         suggestion: {
           title: index[0],

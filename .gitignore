@@ -62,3 +62,4 @@ typings/
 
 # idea files
 .idea
+.vscode/launch.json
