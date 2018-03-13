@@ -44,7 +44,8 @@ module.exports = {
     }
   },
   Timeouts: { // everything is in ms
-    messagedelete: 2500
+    messagedelete: 2500,
+    reactiondlete: 2500
   },
   debug_email: 'doctors@doc.tors.life'
 }
