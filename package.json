@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Arzte/megabot",
   "devDependencies": {
-    "eslint": "^4.16.0",
+    "eslint": "^4.18.2",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
