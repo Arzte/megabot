@@ -22,11 +22,10 @@ module.exports = {
   UV: {
     Login: {
       forum_id: '',
-      subdomain: '', // Uservoice *.uservoice.com subdomain, not your custom domain
-      api_key: ''
+      subdomain: '' // Uservoice *.uservoice.com subdomain, not your custom domain
     },
     Channels: {
-      default: false, // false = ignore !sumbit commands in uncategorized channels. supply a category ID to default to that category. leave blank to submit uncategorized, if possible
+      default: false, // false = ignore !sumbit commands in uncategorized channels. supply a category ID to default to that category. true = submit uncategorized, if possible
       channels: {
         // ChannelID: UVcategoryID
       }

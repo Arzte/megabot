@@ -1,8 +1,7 @@
-const required = [ // this is the absolute minimum required to run wildbeast
+const required = [ // this is the absolute minimum required to run
   'BOT_TOKEN',
   'BOT_PREFIX',
-  'USERVOICE_SECRET_KEY',
-  'WILDBEAST_MASTERS'
+  'USERVOICE_SECRET_KEY'
 ]
 
 for (let x of required) {
