@@ -20,7 +20,11 @@ module.exports = {
       console.log(result)
       msg.channel.createMessage('Your comment \n``' + result + '``\n has been submitted!')
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
+function t(error) {
+  console.log(error);
+}
+
