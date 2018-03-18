@@ -1,16 +1,20 @@
 const commands = require('../internal/command-indexer').commands
 const aliases = require('../internal/command-indexer').alias
-
+const constants = require('../internal/constants')
 const engines = {
   perms: require('../engines/permissions'),
   settings: require('../engines/settings'),
-  timeout: require('../engines/timeouts')
+  timeout: require('../engines/timeouts'),
+  queue: require('../engines/queue')
 }
 const masters = process.env['WILDBEAST_MASTERS'].split('|')
 
 module.exports = async (ctx) => {
   const msg = ctx[0]
-  if (msg.author.bot) return
+  if (msg.author.bot) {
+    if (msg.channel.id === constants.Guild.feed) engines.queue.newCard(msg)
+    return
+  }
   const prefix = (msg.channel.guild) ? await engines.settings.prefix(msg.channel.guild, msg) : process.env.BOT_PREFIX
   if (msg.content.indexOf(prefix) === 0) {
     let cmd = msg.content.substr(prefix.length).split(' ')[0].toLowerCase()
