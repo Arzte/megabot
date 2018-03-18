@@ -2,8 +2,7 @@ module.exports = {
   meta: {
     level: 10,
     timeout: 0,
-    alias: [],
-    help: 'Gives a response if the bot is alive'
+    alias: []
   },
   fn: async (msg) => {
     let start = new Date(msg.timestamp)
