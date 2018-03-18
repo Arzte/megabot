@@ -1,4 +1,3 @@
-const Constants = require('../internal/constants')
 const Helpers = {
   login: require('../engines/login')
 }
@@ -11,15 +10,17 @@ module.exports = {
       user: 20000
     }
   },
-  fn: (msg, suffix) => {
+  fn: async (msg, suffix) => {
     msg.bot.sendTyping()
     let suggst = suffix.split(' | ')[0]
     let comt = suffix.split(' | ')[1]
-    Helpers.login.user(msg.author.id).then(client => {
-      client.post(`admin/comments`, `body=${comt},links.suggestion=${suggst}`).then(res => {
-        console.log(res)
-        msg.channel.createMessage('Your comment \n``' + res + '``\n has been submitted!')
-      })
-    })
+    try {
+      const client = await Helpers.login.user(msg.author.id)
+      const result = await client.post(`admin/comments`, `body=${comt},links.suggestion=${suggst}`)
+      console.log(result)
+      msg.channel.createMessage('Your comment \n``' + result + '``\n has been submitted!')
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
