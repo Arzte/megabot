@@ -24,7 +24,3 @@ module.exports = {
     }
   }
 }
-function t(error) {
-  console.log(error);
-}
-
