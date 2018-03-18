@@ -11,20 +11,17 @@ module.exports = {
       user: 20000
     }
   },
-  fn: (msg, suffix) => {
+  fn: async (msg, suffix) => {
     msg.channel.sendTyping()
     const index = suffix.split(' | ')
-    Helpers.login.user(msg.author.id).then(client => {
-      return client.post(`forums/${Constants.UV.Forum_ID}/suggestions.json`, {
-        suggestion: {
-          title: index[0],
-          text: index[1],
-          votes: 1,
-          category_id: (!Constants.UV.Channels.default) ? Constants.UV.Channels.channels[msg.channel.id] : Constants.UV.Channels.default //eslint-disable-line
-        }
-      }).then(result => {
-        return msg.reply('feedback submitted!')
-      }).catch(console.error)
-    }).catch(console.error)
+    const category = (!Constants.UV.Channels.default) ? Constants.UV.Channels.channels[msg.channel.id] : Constants.UV.Channels.default //eslint-disable-line
+    try {
+      const client = await Helpers.login.user(msg.author.id)
+      const result = await client.post(`admin/suggestions`, `title=${index[0]},body=${index[1]},links.forum=${Constants.UV.Forum_ID},links.category=${category}`)
+      console.log(result)
+      await msg.channel.createMessage('Your submission \n``' + result.suggestions[0].title + ':\n' + result.suggestions[0].body + '``\n has been submitted!')
+    } catch (error) {
+      logger.error(error)
+    }
   }
 }

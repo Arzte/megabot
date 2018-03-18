@@ -5,10 +5,13 @@ module.exports = {
     alias: [],
     help: 'Gives a response if the bot is alive'
   },
-  fn: (msg) => {
+  fn: async (msg) => {
     let start = new Date(msg.timestamp)
-    msg.channel.createMessage('Pong!').then(c => {
-      c.edit(`Pong! \`${Math.floor(new Date(c.timestamp) - start)}ms, ${global.bot.shards.random().latency}ms\``) // whatever, latency is pretty consistent across shards anyway
-    })
+    try {
+      const message = await msg.channel.createMessage('Pong!')
+      await message.edit(`Pong! \`${Math.floor(new Date(message.timestamp) - start)}ms, ${global.bot.shards.random().latency}ms\``) // whatever, latency is pretty consistent across shards anyway
+    } catch (error) {
+      logger.error(error)
+    }
   }
 }
