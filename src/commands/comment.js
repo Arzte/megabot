@@ -15,13 +15,11 @@ module.exports = {
     msg.bot.sendTyping()
     let suggst = suffix.split(' | ')[0]
     let comt = suffix.split(' | ')[1]
-    Helpers.login.user(`forums/${Constants.UV.Forum_ID}/suggestions/${suggst}/comments.json`, {
-      comment: {
-        text: comt
-      }
-    }).then(res => {
-      console.log(res)
-      msg.channel.createMessage('Your comment \n``' + res + '``\n has been submitted!')
+    Helpers.login.user(msg.author.id).then(client => {
+      client.post(`admin/comments`, `body=${comt},links.suggestion=${suggst}`).then(res => {
+        console.log(res)
+        msg.channel.createMessage('Your comment \n``' + res + '``\n has been submitted!')
+      })
     })
   }
 }
