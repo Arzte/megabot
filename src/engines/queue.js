@@ -3,7 +3,7 @@ const r = require('../models/rethinkdb')
 module.exports = {
   newFeedCard: async (msg) => {
     try {
-      const card = await r.table('queue').insert({
+      const card = r.table('queue').insert({
         id: msg.id,
         approvers: [],
         deniers: [],
@@ -25,7 +25,7 @@ module.exports = {
   },
   newCard: async (msg) => {
     try {
-      const card = await r.table('queue').insert({
+      const card = r.table('queue').insert({
         id: msg.id,
         deniers: [],
         completionists: [],

@@ -7,15 +7,14 @@ module.exports = async (ctx) => {
     const emoji = msg.channel.guild.emojis
     const approve = emoji.find(emoji => emoji.name === 'approve')
     const f1 = emoji.find(emoji => emoji.name === 'f1')
-    const card = await r.table('queue').get(msg.id)
+    const card = r.table('queue').get(msg.id)
     const doc = await card.run()
     await doc.update({
       approvers: r.row('approvers').default([]).append(msg.author.id),
       approved: r.row('approved').add(1).default(0)
-    })
-    await doc.run()
-    await doc.reports++
-    if (await doc.approved === Constants.Guild.reportThres) {
+    }).run()
+    doc.approved++
+    if (doc.approved === Constants.Guild.reportThres) {
       var reportsArr = await msg.fetchReactions(`${approve.name}:${approve.id}`)
       for (let reaction in reportsArr) {
         await msg.removeReaction(`${approve.name}:${approve.id}`, reaction[0])
