@@ -1,4 +1,5 @@
 const r = require('../models/rethinkdb')
+const Constants = require('../internal/constants')
 
 module.exports = {
   newFeedCard: async (msg) => {
@@ -14,11 +15,8 @@ module.exports = {
         UvId: msg.embeds[0].footer.text.split('ID: ')[1]
       })
       await card.run()
-      const emoji = msg.channel.guild.emojis
-      const approve = emoji.find(emoji => emoji.name === 'approve')
-      const deny = emoji.find(emoji => emoji.name === 'deny')
-      await msg.addReaction(`${approve.name}:${approve.id}`)
-      await msg.addReaction(`${deny.name}:${deny.id}`)
+      await msg.addReaction(Constants.Emoji.approve)
+      await msg.addReaction(Constants.Emoji.deny)
     } catch (error) {
       logger.error(error)
     }
@@ -46,17 +44,13 @@ module.exports = {
         UvId: msg.embeds[0].footer.text.split('ID: ')[1]
       })
       await card.run()
-      const emoji = msg.channel.guild.emojis
-      const deny = emoji.find(emoji => emoji.name === 'deny')
-      const dupe = emoji.find(emoji => emoji.name === 'dupeplsmerge')
-      const cracked = emoji.find(emoji => emoji.name === 'cracked')
-      await msg.addReaction(`${deny.name}:${deny.id}`) // deny (Red transparent X)
+      await msg.addReaction(Constants.Emoji.deny) // deny (Red transparent X)
       await msg.addReaction('💯') // complete (100 emoji)
       await msg.addReaction('▶') // started (arrow forward (looks like play button))
-      await msg.addReaction(`${dupe.name}:${dupe.id}`) // dupe (dupe plz merge)
+      await msg.addReaction(Constants.Emoji.dupe) // dupe (dupe plz merge)
       await msg.addReaction('🕷') // bug (spider)
       await msg.addReaction('🙈') // inappropriate (aka monkey)
-      await msg.addReaction(`${cracked.name}:${cracked.id}`) // jokes / shitpost idea (broke bulb)
+      await msg.addReaction(Constants.Emoji.bulb) // jokes / shitpost idea (broke bulb)
     } catch (error) {
       logger.error(error)
     }
