@@ -14,8 +14,11 @@ module.exports = {
         UvId: msg.embeds[0].footer.text.split('ID: ')[1]
       })
       await card.run()
-      await msg.addReaction('approve:302137375092375553')
-      await msg.addReaction('deny:302137375113609219')
+      const emoji = await msg.channel.guild.emojis
+      const approve = await emoji.find(emoji => emoji.name === 'approve')
+      const deny = await emoji.find(emoji => emoji.name === 'deny')
+      await msg.addReaction(`${approve.name}:${approve.id}`)
+      await msg.addReaction(`${deny.name}:${deny.id}`)
     } catch (error) {
       logger.error(error)
     }
@@ -43,13 +46,17 @@ module.exports = {
         UvId: msg.embeds[0].footer.text.split('ID: ')[1]
       })
       await card.run()
-      await msg.addReaction('deny:302137375113609219') // deny (Red transparent X)
+      const emoji = await msg.channel.guild.emojis
+      const deny = emoji.find(emoji => emoji.name === 'deny')
+      const dupe = emoji.find(emoji => emoji.name === 'dupeplsmerge')
+      const cracked = emoji.find(emoji => emoji.name === 'cracked')
+      await msg.addReaction(`${deny.name}:${deny.id}`) // deny (Red transparent X)
       await msg.addReaction('💯') // complete (100 emoji)
       await msg.addReaction('▶') // started (arrow forward (looks like play button))
-      await msg.addReaction('dupeplsmerge:319762779403845632') // dupe (dupe plz merge)
+      await msg.addReaction(`${dupe.name}:${dupe.id}`) // dupe (dupe plz merge)
       await msg.addReaction('🕷') // bug (spider)
       await msg.addReaction('🙈') // inappropriate (aka monkey)
-      await msg.addReaction('cracked:285445175407411201') // jokes / shitpost idea (broke bulb)
+      await msg.addReaction(`${cracked.name}:${cracked.id}`) // jokes / shitpost idea (broke bulb)
     } catch (error) {
       logger.error(error)
     }
