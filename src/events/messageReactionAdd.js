@@ -1,4 +1,4 @@
-const Reactions = require('./src/internal/directory-loader')('./src/commands/reactions')
+const Reactions = require('../internal/directory-loader')('./src/commands/reactions')
 
 module.exports = function (ctx) {
   if (ctx[0].author.bot) return

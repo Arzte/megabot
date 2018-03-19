@@ -1,4 +1,4 @@
-const driver = require('../internal/database-selector')
+// const driver = require('../internal/database-selector')
 const masters = process.env['WILDBEAST_MASTERS'].split('|')
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
       if (masters.includes(member.id)) return resolve(Infinity)
       if (guild === false) return resolve(0) // no guild = probably DM
       if (guild.ownerID === member.id) return resolve(10)
-      driver.getPerms(guild).then(data => {
+      /* driver.getPerms(guild).then(data => {
         let result = data.users[member.id] || 0
         for (let role in data.roles) {
           if (result < 0) break
@@ -18,6 +18,6 @@ module.exports = {
         }
         return resolve(result)
       })
-    })
+    */ })
   }
 }
