@@ -2,6 +2,7 @@ module.exports = {
   Guild: {
     id: '268811439588900865',
     feed: '258274103935369219',
+    pubFeed: '302112999794278400',
     reportThres: '5' // Probably needs to be moved, just don't know where
   },
   UVRegex: /https?:\/\/[\w.]+\/forums\/(\d{6,})(?:-[\w-]+)?\/suggestions\/(\d{7,})(?:-[\w-]*)?/,

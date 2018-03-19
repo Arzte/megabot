@@ -1,4 +1,7 @@
 const Constants = require('../../internal/constants')
+const Helpers = {
+  login: require('../../engines/login')
+}
 const r = require('../../models/rethinkdb')
 
 module.exports = async (ctx) => {
@@ -9,12 +12,21 @@ module.exports = async (ctx) => {
       const card = await r.table('queue').get(msg.id).run()
       const userReactArray = await msg.getReactions(Constants.Emoji.approve, 100, '', bot.user)
       const userIdArray = userReactArray.map(user => user.id)
-
+      const client = await Helpers.login.owner
+      const result = await client.get(`admin/suggestions/${card.UvId}`)
+      const suggestion = result.suggestions[0]
+      const message = await bot.createMessage(Constants.Guild.pubFeed, {
+        title: suggestion.title,
+        description: suggestion.body,
+        url: suggestion.portal_url,
+        timestamp: suggestion.created_at
+      })
       await card.update({
+        id: r.row('id').update(message.id),
         approvers: r.row('approvers').default([]).append(userIdArray),
-        approved: r.row('approved').add(userIdArray.length).default(0)
+        approved: r.row('approved').uppdate(userIdArray.length).default(0)
       }).run()
-      // TODO: Send a card to the queue, can't be bothered to setup that boilerplate right now.
+      msg.delete('approved by custodians.')
     }
 
     const message = await msg.addReaction(Constants.Emoji.f1)
