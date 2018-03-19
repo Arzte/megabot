@@ -4,7 +4,7 @@ const r = require('../../models/rethinkdb')
 module.exports = async (ctx) => {
   try {
     const msg = ctx[0]
-    const emoji = await msg.channel.guild.emojis
+    const emoji = msg.channel.guild.emojis
     const approve = emoji.find(emoji => emoji.name === 'approve')
     const f1 = emoji.find(emoji => emoji.name === 'f1')
     const card = await r.table('queue').get(msg.id)

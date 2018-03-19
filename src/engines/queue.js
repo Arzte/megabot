@@ -14,9 +14,9 @@ module.exports = {
         UvId: msg.embeds[0].footer.text.split('ID: ')[1]
       })
       await card.run()
-      const emoji = await msg.channel.guild.emojis
-      const approve = await emoji.find(emoji => emoji.name === 'approve')
-      const deny = await emoji.find(emoji => emoji.name === 'deny')
+      const emoji = msg.channel.guild.emojis
+      const approve = emoji.find(emoji => emoji.name === 'approve')
+      const deny = emoji.find(emoji => emoji.name === 'deny')
       await msg.addReaction(`${approve.name}:${approve.id}`)
       await msg.addReaction(`${deny.name}:${deny.id}`)
     } catch (error) {
@@ -46,7 +46,7 @@ module.exports = {
         UvId: msg.embeds[0].footer.text.split('ID: ')[1]
       })
       await card.run()
-      const emoji = await msg.channel.guild.emojis
+      const emoji = msg.channel.guild.emojis
       const deny = emoji.find(emoji => emoji.name === 'deny')
       const dupe = emoji.find(emoji => emoji.name === 'dupeplsmerge')
       const cracked = emoji.find(emoji => emoji.name === 'cracked')
