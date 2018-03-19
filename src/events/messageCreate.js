@@ -12,6 +12,7 @@ const masters = process.env['WILDBEAST_MASTERS'].split('|')
 module.exports = async (ctx) => {
   const msg = ctx[0]
   if (msg.author.bot) {
+    if (msg.author.discriminator === '0000') engines.queue.newFeedCard(msg) // we want to reserve this newCard for the webhook
     if (msg.channel.id === constants.Guild.feed) engines.queue.newCard(msg)
     return
   }
