@@ -6,11 +6,12 @@ const r = require('../../models/rethinkdb')
 
 module.exports = async (ctx) => {
   try {
-    const msg = ctx[0]
+    // We need to fetch the reaction, in case the message isn't cached by the bot.
+    const msg = await bot.getMessage(ctx[0].channel.id, ctx[0].id)
 
-    if (await msg.getReaction(Constants.Emoji.approve).length() === Constants.Guild.reportThres) {
+    if (await msg.getReaction(Constants.UV.Emoji.approve).length === Constants.Guild.reportThres) {
       const card = await r.table('queue').get(msg.id).run()
-      const userReactArray = await msg.getReactions(Constants.Emoji.approve, 100, '', bot.user)
+      const userReactArray = await msg.getReaction(Constants.Emoji.approve, 100, '', bot.user)
       const userIdArray = userReactArray.map(user => user.id)
       const client = await Helpers.login.owner
       const result = await client.get(`admin/suggestions/${card.UvId}`)
@@ -29,8 +30,8 @@ module.exports = async (ctx) => {
       msg.delete('approved by custodians.')
     }
 
-    const message = await msg.addReaction(Constants.Emoji.f1)
-    setTimeout(() => message.removeReaction(Constants.Emoji.f1), Constants.Timeouts.removeReaction)
+    const message = await msg.addReaction(Constants.UV.Emoji.f1)
+    setTimeout(() => message.removeReaction(Constants.UV.Emoji.f1), Constants.Timeouts.removeReaction)
   } catch (error) {
     logger.error(error)
   }
