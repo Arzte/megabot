@@ -3,6 +3,7 @@ module.exports = {
     id: '268811439588900865',
     feed: '258274103935369219',
     pubFeed: '302112999794278400',
+    adminFeed: '294530473290498049', // #mods in DFeedback
     reportThres: '5' // Probably needs to be moved, just don't know where
   },
   UVRegex: /https?:\/\/[\w.]+\/forums\/(\d{6,})(?:-[\w-]+)?\/suggestions\/(\d{7,})(?:-[\w-]*)?/,
@@ -37,7 +38,9 @@ module.exports = {
       deny: 'deny:302137375113609219',
       f1: 'f1:401095659656183848',
       dupe: 'dupeplsmerge:319762779403845632',
-      buld: 'cracked:285445175407411201'
+      bulb: 'cracked:285445175407411201',
+      upvote: `upvote:302138464986595339`,
+      report: `report:302137374920671233`
     }
   },
   DefaultPerms: {
