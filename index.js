@@ -11,6 +11,8 @@ const bot = new Eris(process.env['BOT_TOKEN'], {
   restMode: true
 })
 
+global.bot = bot
+
 bot._ogEmit = bot.emit
 bot.emit = function emit () {
   this._anyListeners.forEach(listener => listener.apply(this, [arguments]))
@@ -21,11 +23,12 @@ bot.onAny = function onAny (func) {
   this._anyListeners.push(func)
 }
 
+bot.on('debug', global.logger.debug)
+
 bot.onAny((ctx) => {
   if (Events[ctx[0]]) {
-    // global.logger.debug(`Found listener for event '${ctx[0]}'`)
     Events[ctx[0]](Array.from(ctx).slice(1))
-  } // else Logger.debug(`No listener for '${ctx[0]}' found`)
+  }
 })
 
 process.on('unhandledRejection', (err) => {
@@ -38,5 +41,6 @@ process.on('uncaughtException', (err) => {
 })
 
 bot.connect().then(() => {
-  global.bot = bot
+    // This is mostly filler in case we want something for logger later on.
+    logger.log("Connected to discord")
 })
