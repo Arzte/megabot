@@ -1,11 +1,11 @@
-import './src/internal/check-env'
-
-import Eris from 'eris'
-
 require('dotenv').config()
 
 global.logger = require('./src/internal/logger')
 global.logger.log('Beginning startup sequence...')
+
+require('./src/internal/check-env')
+
+const Eris = require('eris')
 const Events = require('./src/internal/directory-loader')('./src/events')
 const bot = new Eris(process.env['BOT_TOKEN'], {
   restMode: true
@@ -41,6 +41,6 @@ process.on('uncaughtException', (err) => {
 })
 
 bot.connect().then(() => {
-  // This is mostly filler in case we want something for logger later on.
-  logger.log('Connected to discord')
+    // This is mostly filler in case we want something for logger later on.
+    logger.log("Connected to discord")
 })

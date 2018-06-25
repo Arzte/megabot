@@ -1,6 +1,6 @@
 const Reactions = require('../internal/directory-loader')('./src/commands/reactions')
 
-export default async function (ctx) {
+module.exports = async function (ctx) {
   try {
     // We don't get the message author object, just an id, so we need to get that object
     if (await bot.getRESTUser(ctx[2]).bot) return
